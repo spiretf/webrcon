@@ -1,0 +1,16 @@
+{
+	"name": "webrcon",
+	"description": "Create rcon connections using websockets",
+	"author": "Robin Appelman <robin@icewind.nl>",
+	"license": "MIT",
+	"version": "0.1.0",
+	"main": "src/rcon.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/spiretf/webrcon"
+	},
+	"dependencies": {
+		"bluebird": "^3.0.5",
+		"ws": "^0.8.0"
+	}
+}
