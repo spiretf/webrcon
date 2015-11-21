@@ -1,0 +1,7 @@
+.idea
+.babelrc
+.gitignore
+plugin
+node_modules
+src
+test.js
