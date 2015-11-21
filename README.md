@@ -40,3 +40,12 @@ const rcon = new Rcon('127.0.0.1', 'secret_rcon_password');
 
 
 ```
+
+### API
+
+
+- `status(): Promise<Object>` get server status including players
+- `getSVar(string: name): Promise<String>` get the value of a server var
+- `setSVar(string: name, string: value): Promise` set the value of a server var
+- `changeLevel(string: level): Promise` change the level
+- `sendString(string: command): Promise<string>` send a raw rcon command
