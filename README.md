@@ -8,6 +8,8 @@ WebRcon consists of a sourcemod plugin that accepts websocket connections and al
 
 [Download Plugin](https://github.com/spiretf/webrcon/raw/master/plugin/webrcon.smx)
 
+Requires [websocket](https://forums.alliedmods.net/showthread.php?t=182615)
+
 ### Authentication
 
 Authentication of the websocket connection is done by sending the password as the first message over the socket, if authentication is successfull the server will respond with `"authenticated"`
