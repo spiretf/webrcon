@@ -5,6 +5,9 @@
 	"license": "MIT",
 	"version": "0.1.1",
 	"main": "lib/rcon.js",
+	"scripts": {
+		"build": "babel src --out-dir lib"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/spiretf/webrcon"

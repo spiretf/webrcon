@@ -11,8 +11,13 @@ export default class Connection {
 	constructor (host, password) {
 		this.host = host;
 		this.password = password;
+		this.errorListeners = [];
 
 		this.init();
+	}
+
+	onError (listener) {
+		this.errorListeners.push(listener);
 	}
 
 	buildRcon () {
@@ -45,6 +50,11 @@ export default class Connection {
 			}, 100);
 		});
 		this.rcon.on('error', (e) => {
+			if (e == 'not authenticated') {
+				for (let listener of this.errorListeners) {
+					listener(e);
+				}
+			}
 			this.errorCount++;
 			console.log('failed to connect ' + this.errorCount + ' times (' + e + ')');
 			Promise.delay(2500).then(() => {

@@ -9,6 +9,14 @@ export default class Rcon {
 		this.connection = new Connection(host, password);
 	}
 
+	disconnect () {
+		this.connection.disconnect();
+	}
+
+	onError (listener) {
+		this.connection.onError(listener);
+	}
+
 	sendString (command) {
 		return this.connection.sendString(command);
 	}
