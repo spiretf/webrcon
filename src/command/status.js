@@ -48,7 +48,11 @@ export default class Status {
 					player.ping = parseInt(parts[2], 10);
 					player.ip = parts[5];
 					var timeParts = parts[1].split(':');
-					player.connected = parseInt(timeParts[0], 10) * 60 + parseInt(timeParts[1], 10);
+					if (timeParts.length === 2) {
+						player.connected = parseInt(timeParts[0], 10) * 60 + parseInt(timeParts[1], 10);
+					} else {
+						player.connected = parseInt(timeParts[0], 10) * 3600 + parseInt(timeParts[1], 10) * 60 + parseInt(timeParts[2], 10);
+					}
 				}
 				status.players.push(player)
 			}

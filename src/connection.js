@@ -54,6 +54,7 @@ export default class Connection {
 				for (let listener of this.errorListeners) {
 					listener(e);
 				}
+				return;
 			}
 			this.errorCount++;
 			console.log('failed to connect ' + this.errorCount + ' times (' + e + ')');
