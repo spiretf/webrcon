@@ -11,48 +11,53 @@ export default class WebRcon extends EventEmitter {
 		this.queue = [];
 		this.authenticated = false;
 		this.connected = false;
+		this.connecting = false;
 	}
 
 	connect () {
-		if (this.connected) {
+		if (this.connected || this.connecting) {
 			return;
 		}
+		this.connecting = true;
 		this.socket = new WebSocket('ws://' + this.host + ':' + this.port, 'foo');
 		this.socket.onopen = () => {
 			if (this.socket.readyState === 1) {
 				this.socket.send(this.password);
-				this.connected = true;
 				this.emit('connect');
 				setTimeout(() => {
 					for (let message of this.queue) {
 						this.socket.send(message);
 					}
 					this.queue = [];
+					this.connecting = false;
+					this.connected = true;
 				}, 100);
 			}
 		};
-		this.socket.onmessage = (data) => {
-			if (data.data === 'authenticated') {
+		this.socket.onmessage = ({data}) => {
+			if (data === 'authenticated') {
 				this.authenticated = true;
 			} else {
 				if (!this.authenticated) {
 					this.emit('error', 'not authenticated');
 				}
-				this.emit('response', data.data)
+				this.emit('response', data)
 			}
 		};
 		this.socket.onerror = (error) => {
+			this.connecting = false;
 			this.emit('error', error);
 		};
 		this.socket.onclose = () => {
+			this.connecting = false;
 			this.emit('close');
 		};
 	}
 
 	send (string) {
-		this.connect();
-		if (this.socket.readyState !== 1) {
+		if (!this.connected) {
 			this.queue.push(string);
+			this.connect();
 		} else {
 			this.socket.send(string);
 		}
