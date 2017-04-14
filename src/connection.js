@@ -56,7 +56,6 @@ export default class Connection {
 				return;
 			}
 			this.errorCount++;
-			console.log('failed to connect');
 			this.delay(2500).then(() => {
 				if (this.connectPromise) {
 					this.rcon.connect();
