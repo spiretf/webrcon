@@ -64,6 +64,8 @@ export default class WebRcon extends EventEmitter {
 	}
 
 	disconnect () {
-		this.socket.disconnect();
+		if (this.socket && this.socket.disconnect) {
+			this.socket.disconnect();
+		}
 	}
 }
