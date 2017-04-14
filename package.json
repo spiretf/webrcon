@@ -1,19 +1,24 @@
 {
-	"name": "webrcon",
-	"description": "Create rcon connections using websockets",
-	"author": "Robin Appelman <robin@icewind.nl>",
-	"license": "MIT",
-	"version": "0.1.2",
-	"main": "lib/rcon.js",
-	"scripts": {
-		"build": "babel src --out-dir lib"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/spiretf/webrcon"
-	},
-	"dependencies": {
-		"bluebird": "^3.0.5",
-		"ws": "^0.8.0"
-	}
+  "name": "webrcon",
+  "description": "Create rcon connections using websockets",
+  "author": "Robin Appelman <robin@icewind.nl>",
+  "license": "MIT",
+  "version": "0.1.2",
+  "main": "lib/rcon.js",
+  "scripts": {
+    "build": "babel src --out-dir lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spiretf/webrcon"
+  },
+  "dependencies": {
+    "ws": "^2.2.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-async-to-promises": "^1.0.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1"
+  }
 }

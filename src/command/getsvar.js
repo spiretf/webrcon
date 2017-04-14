@@ -5,8 +5,8 @@ export default class GetSVar {
 	}
 
 	handler (response) {
-		var regex = '"' + this.name + '" = "([^"]*)"';
-		var matches = response.match(new RegExp(regex));
+		const regex = '"' + this.name + '" = "([^"]*)"';
+		const matches = response.match(new RegExp(regex));
 		if (matches) {
 			return matches[1];
 		} else {

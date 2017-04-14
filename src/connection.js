@@ -1,4 +1,3 @@
-import Promise from 'bluebird';
 import WebRcon from './webrcon.js';
 
 export default class Connection {
@@ -36,11 +35,11 @@ export default class Connection {
 			this.receivedBuffer += response;
 			// buffer the response
 			this.receivedTimer = setTimeout(() => {
-				var response = this.receivedBuffer;
+				const response = this.receivedBuffer;
 				this.receivedBuffer = '';
 				if (this.messageHandlers.length) {
 					while (this.messageHandlers.length > 0) {
-						var handler = this.messageHandlers.shift();
+						const handler = this.messageHandlers.shift();
 						handler(response);
 					}
 				} else {
@@ -50,14 +49,13 @@ export default class Connection {
 			}, 100);
 		});
 		this.rcon.on('error', (e) => {
-			if (e == 'not authenticated') {
+			if (e === 'not authenticated') {
 				for (let listener of this.errorListeners) {
 					listener(e);
 				}
 				return;
 			}
 			this.errorCount++;
-			console.log('failed to connect ' + this.errorCount + ' times (' + e + ')');
 			Promise.delay(2500).then(() => {
 				if (this.connectPromise) {
 					this.rcon.connect();
@@ -90,7 +88,7 @@ export default class Connection {
 		await this.waitFor(() => {
 			return this.messageHandlers.length === 0;
 		}, 500);
-		var promise = new Promise((resolve) => {
+		const promise = new Promise((resolve) => {
 			this.messageHandlers.push(resolve);
 		});
 		this.rcon.send(command);
@@ -98,7 +96,7 @@ export default class Connection {
 	}
 
 	async send (command) {
-		var response = await this.sendString(command.command);
+		const response = await this.sendString(command.command);
 		return command.handler(response);
 	}
 
@@ -107,14 +105,22 @@ export default class Connection {
 	}
 
 	async waitFor (cb, timeout) {
-		var waited = 0;
+		let waited = 0;
 		while (waited < timeout) {
 			if (cb()) {
 				return true;
 			}
-			await Promise.delay(250);
+			await this.delay(250);
 			waited += 250;
 		}
 		return false;
+	}
+
+	delay (delay) {
+		return new Promise(function (resolve) {
+			setTimeout(function () {
+				resolve()
+			}, delay)
+		})
 	}
 }

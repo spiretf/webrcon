@@ -24,7 +24,7 @@ export default class WebRcon extends EventEmitter {
 				this.connected = true;
 				this.emit('connect');
 				setTimeout(() => {
-					for (var message of this.queue) {
+					for (let message of this.queue) {
 						this.socket.send(message);
 					}
 					this.queue = [];
