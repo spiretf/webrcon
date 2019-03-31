@@ -6,7 +6,7 @@ import Status from './command/status';
 
 export default class Rcon {
 	constructor (host, password) {
-		this.connection = new Connection(host, password);
+		this.connection = new Connection(host, password, port = 27021);
 	}
 
 	disconnect () {
