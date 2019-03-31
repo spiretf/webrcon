@@ -7,9 +7,10 @@ export default class Connection {
 	receivedBuffer = '';
 	errorCount = 0;
 
-	constructor (host, password) {
+	constructor (host, password, port = 27021) {
 		this.host = host;
 		this.password = password;
+		this.port = port;
 		this.errorListeners = [];
 
 		this.init();
@@ -23,7 +24,7 @@ export default class Connection {
 		if (this.rcon) {
 			return;
 		}
-		this.rcon = new WebRcon(this.host, this.password);
+		this.rcon = new WebRcon(this.host, this.password, this.port);
 	}
 
 	init () {
