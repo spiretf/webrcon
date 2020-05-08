@@ -13,7 +13,7 @@
     "url": "https://github.com/spiretf/webrcon"
   },
   "dependencies": {
-    "ws": "^2.2.3"
+    "ws": "^7.2.5"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
