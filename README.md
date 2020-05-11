@@ -33,7 +33,7 @@ npm install --save webrcon
 ```js
 import Rcon from 'webrcon';
 
-const rcon = new Rcon('127.0.0.1', 'secret_rcon_password');
+const rcon = new Rcon('127.0.0.1', 'secret_rcon_password', '27021');
 
 (async () => {
 	const result = await rcon.status();
