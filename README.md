@@ -1,3 +1,5 @@
+# Moved to https://codeberg.org/spire/webrcon
+
 # WebRcon
 
 Create rcon connections using websockets
